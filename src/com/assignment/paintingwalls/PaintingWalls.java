@@ -13,7 +13,7 @@ public class PaintingWalls {
 
         Scanner scan = new Scanner(System.in);
 
-        System.out.println("How many WALLS do you want to paint?");
+        System.out.println("How many walls do you want to paint?");
         int walls = scan.nextInt();
 
         System.out.println("How tall is the room in metres?");
