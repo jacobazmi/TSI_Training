@@ -13,7 +13,7 @@ public class PaintingWalls {
 
         Scanner scan = new Scanner(System.in);
 
-        System.out.println("How many WALLS do you want to paint?");
+        System.out.println("How many walls do you want to paint?");
         int walls = scan.nextInt();
 
         System.out.println("How tall is the room in metres?");
@@ -25,10 +25,18 @@ public class PaintingWalls {
         System.out.println("What size paint pots will be used in litres?");
         double paintPotVolume = scan.nextDouble();
 
-        System.out.println("What is the cost of a pot of paint in dollars?");
-        double paintPotCost = scan.nextDouble();
+        double paintPotCost = 0;
 
-        double paintPotCoverage = 4.8*paintPotVolume;
+        if (paintPotVolume == 2.5) {
+            paintPotCost = 15;
+        } else if (paintPotVolume == 5) {
+            paintPotCost = 30;
+        }
+
+        //System.out.println("What is the cost of a pot of paint in dollars?");
+        //double paintPotCost = scan.nextDouble();
+
+    double paintPotCoverage = 4.8*paintPotVolume;
         double areaToPaint = roomHeight*roomWidth*walls;
         double potsRequired = Math.ceil(areaToPaint/paintPotCoverage);
         double paintUsed = areaToPaint/4.8;
