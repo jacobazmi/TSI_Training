@@ -8,15 +8,6 @@ public class PaintingWalls {
 
         Scanner scan = new Scanner(System.in);
 
-        //System.out.println("How many walls do you want to paint?");
-        //int walls = scan.nextInt();
-
-        //System.out.println("How tall is the room in metres?");
-        //double roomHeight = scan.nextDouble();
-
-        //System.out.println("How wide is the room in metres?"); // room assumed square
-        //double roomWidth = scan.nextDouble();
-
         double roomHeight = 0;
         double roomWidth = 0;
         int walls = 0;
