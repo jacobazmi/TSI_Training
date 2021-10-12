@@ -4,12 +4,6 @@ import java.util.Scanner;
 
 public class PaintingWalls {
     public static void main(String[] args) {
-        //double paintPotVolume = 2.5; // litres
-        //double paintPotCoverage = 12; // square metres
-        //double paintPotCost = 5.6; // dollars
-        //double roomHeight = 3.7; // metres
-        //double roomWidth = 4.8; // metres
-        //int walls = 2;
 
         Scanner scan = new Scanner(System.in);
 
@@ -22,8 +16,21 @@ public class PaintingWalls {
         System.out.println("How wide is the room in metres?"); // room assumed square
         double roomWidth = scan.nextDouble();
 
+        System.out.println("What type of paint would you like to use? (flat/eggshell/satin/gloss");
+        String paintType = scan.next();
+
         System.out.println("What size paint pots will be used in litres?");
         double paintPotVolume = scan.nextDouble();
+
+        double costModifier = 0;
+
+        costModifier = switch (paintType) {
+            case "flat" -> 1;
+            case "eggshell" -> 1.1;
+            case "satin" -> 1.4;
+            case "gloss" -> 1.9;
+            default -> 1;
+        };
 
         double paintPotCost = 0;
 
@@ -33,15 +40,13 @@ public class PaintingWalls {
             paintPotCost = 30;
         }
 
-        //System.out.println("What is the cost of a pot of paint in dollars?");
-        //double paintPotCost = scan.nextDouble();
 
-    double paintPotCoverage = 4.8*paintPotVolume;
+        double paintPotCoverage = 4.8*paintPotVolume;
         double areaToPaint = roomHeight*roomWidth*walls;
         double potsRequired = Math.ceil(areaToPaint/paintPotCoverage);
         double paintUsed = areaToPaint/4.8;
         double remainingPaint = (potsRequired*paintPotVolume) - paintUsed;
-        double totalCost = potsRequired*paintPotCost;
+        double totalCost = potsRequired*paintPotCost*costModifier;
 
         System.out.println("To paint " + walls + " walls, the painter will need " + (int)potsRequired + " " + paintPotVolume + "L pot(s) of paint.");
         System.out.println("The total cost of the job will be " + "$" + String.format("%.2f",totalCost) + ".");
