@@ -45,7 +45,7 @@ public class PaintingWalls {
         String paintType = scan.next();
 
         double costModifier = 0;
-        double[] costModTable = {1,1.1,1.4,1.9};
+        double[] costModTable = {getNumberMod(costModifier),1.1,1.4,1.9};
 
         costModifier = switch (paintType) {
             case "flat" -> costModTable[0];
@@ -83,5 +83,10 @@ public class PaintingWalls {
         System.out.println("The total cost of the job will be " + "$" + String.format("%.2f",totalCost) + ".");
         System.out.println("There will be " + String.format("%.2f",remainingPaint) + " litres of paint leftover.");
 
+    }
+
+    public static double getNumberMod(double x) {
+        double y = x+1;
+        return y;
     }
 }
