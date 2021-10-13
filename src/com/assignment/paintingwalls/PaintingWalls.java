@@ -1,5 +1,7 @@
 package com.assignment.paintingwalls;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -33,36 +35,47 @@ public class PaintingWalls {
 
         } while(Objects.equals(newWallAnswer, "yes"));
 
+        ArrayList<String> listOfPaintTypes = new ArrayList<String>();
+        listOfPaintTypes.add("flat");
+        listOfPaintTypes.add("eggshell");
+        listOfPaintTypes.add("satin");
+        listOfPaintTypes.add("gloss");
 
-        System.out.println("What type of paint would you like to use? (flat/eggshell/satin/gloss");
+        System.out.println("What type of paint would you like to use? " + listOfPaintTypes.get(0) + "/" + listOfPaintTypes.get(1) + "/" + listOfPaintTypes.get(2)  + "/" + listOfPaintTypes.get(3));
         String paintType = scan.next();
+
+        double costModifier = 0;
+        double[] costModTable = {1,1.1,1.4,1.9};
+
+        costModifier = switch (paintType) {
+            case "flat" -> costModTable[0];
+            case "eggshell" -> costModTable[1];
+            case "satin" -> costModTable[2];
+            case "gloss" -> costModTable[3];
+            default -> costModTable[0];
+        };
+
+        double[] potCostTable = {8.99,15.50,27.99};
 
         System.out.println("What size paint pots will be used in litres?");
         double paintPotVolume = scan.nextDouble();
 
-        double costModifier = 0;
-
-        costModifier = switch (paintType) {
-            case "flat" -> 1;
-            case "eggshell" -> 1.1;
-            case "satin" -> 1.4;
-            case "gloss" -> 1.9;
-            default -> 1;
-        };
-
         double paintPotCost = 0;
 
-        if (paintPotVolume == 2.5) {
-            paintPotCost = 15;
-        } else if (paintPotVolume == 5) {
-            paintPotCost = 30;
+
+        if (paintPotVolume == 1) {
+            paintPotCost = potCostTable[0];
+        } else if (paintPotVolume == 2.5) {
+            paintPotCost = potCostTable[1];
+        } else if (paintPotVolume == 5){
+            paintPotCost = potCostTable[2];
         }
 
 
         double paintPotCoverage = 4.8*paintPotVolume;
         //double areaToPaint = roomHeight*roomWidth*walls;
         double potsRequired = Math.ceil(totalAreaToPaint/paintPotCoverage);
-        double paintUsed = areaToPaint/4.8;
+        double paintUsed = totalAreaToPaint/4.8;
         double remainingPaint = (potsRequired*paintPotVolume) - paintUsed;
         double totalCost = potsRequired*paintPotCost*costModifier;
 
